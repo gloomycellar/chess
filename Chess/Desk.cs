@@ -101,8 +101,6 @@ namespace Chess
             ChangePosition(figure, coordinates);
         }
 
-        private FigureBase[,] Field { get { return field; } }
-
         public void ClearField()
         {
             field = new FigureBase[8, 8];
@@ -118,7 +116,7 @@ namespace Chess
 
         public FigureBase GetFigure(Coordinates coordinates)
         {
-            return Field[coordinates.X - 1, coordinates.Y - 1];
+            return field[coordinates.X - 1, coordinates.Y - 1];
         }
 
         public override string ToString()
