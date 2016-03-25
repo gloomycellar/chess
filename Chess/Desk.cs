@@ -9,7 +9,7 @@ namespace Chess
 {
     public class Desk : IDesk
     {
-        private FigureBase[,] desk = new FigureBase[8, 8];
+        private FigureBase[,] field = new FigureBase[8, 8];
 
         public Desk()
         {
@@ -25,100 +25,119 @@ namespace Chess
             {
                 coordinates = new Coordinates(x, 2);
                 figure = new Pawn(this, Color.White, coordinates);
-                SetFigure(figure, coordinates);
+                ChangePosition(figure, coordinates);
             }
 
             coordinates = new Coordinates(1, 1);
             figure = new Elephant(this, Color.White, coordinates);
-            SetFigure(figure, coordinates);
+            ChangePosition(figure, coordinates);
 
             coordinates = new Coordinates(8, 1);
             figure = new Elephant(this, Color.White, coordinates);
-            SetFigure(figure, coordinates);
+            ChangePosition(figure, coordinates);
 
             coordinates = new Coordinates(2, 1);
             figure = new Hourse(this, Color.White, coordinates);
-            SetFigure(figure, coordinates);
+            ChangePosition(figure, coordinates);
 
             coordinates = new Coordinates(7, 1);
             figure = new Hourse(this, Color.White, coordinates);
-            SetFigure(figure, coordinates);
+            ChangePosition(figure, coordinates);
 
             coordinates = new Coordinates(3, 1);
             figure = new Officer(this, Color.White, coordinates);
-            SetFigure(figure, coordinates);
+            ChangePosition(figure, coordinates);
 
             coordinates = new Coordinates(6, 1);
             figure = new Officer(this, Color.White, coordinates);
-            SetFigure(figure, coordinates);
+            ChangePosition(figure, coordinates);
 
             coordinates = new Coordinates(4, 1);
             figure = new Queen(this, Color.White, coordinates);
-            SetFigure(figure, coordinates);
+            ChangePosition(figure, coordinates);
 
             coordinates = new Coordinates(5, 1);
             figure = new King(this, Color.White, coordinates);
-            SetFigure(figure, coordinates);
+            ChangePosition(figure, coordinates);
 
             //init blacks
             for (int x = 1; x <= 8; x++)
             {
                 coordinates = new Coordinates(x, 7);
                 figure = new Pawn(this, Color.Black, coordinates);
-                SetFigure(figure, coordinates);
+                ChangePosition(figure, coordinates);
             }
 
             coordinates = new Coordinates(1, 8);
             figure = new Elephant(this, Color.Black, coordinates);
-            SetFigure(figure, coordinates);
+            ChangePosition(figure, coordinates);
 
             coordinates = new Coordinates(8, 8);
             figure = new Elephant(this, Color.Black, coordinates);
-            SetFigure(figure, coordinates);
+            ChangePosition(figure, coordinates);
 
             coordinates = new Coordinates(2, 8);
             figure = new Hourse(this, Color.Black, coordinates);
-            SetFigure(figure, coordinates);
+            ChangePosition(figure, coordinates);
 
             coordinates = new Coordinates(7, 8);
             figure = new Hourse(this, Color.Black, coordinates);
-            SetFigure(figure, coordinates);
+            ChangePosition(figure, coordinates);
 
             coordinates = new Coordinates(3, 8);
             figure = new Officer(this, Color.Black, coordinates);
-            SetFigure(figure, coordinates);
+            ChangePosition(figure, coordinates);
 
             coordinates = new Coordinates(6, 8);
             figure = new Officer(this, Color.Black, coordinates);
-            SetFigure(figure, coordinates);
+            ChangePosition(figure, coordinates);
 
             coordinates = new Coordinates(4, 8);
             figure = new Queen(this, Color.Black, coordinates);
-            SetFigure(figure, coordinates);
+            ChangePosition(figure, coordinates);
 
             coordinates = new Coordinates(5, 8);
             figure = new King(this, Color.Black, coordinates);
-            SetFigure(figure, coordinates);
+            ChangePosition(figure, coordinates);
         }
 
-        private void SetFigure(FigureBase figure, Coordinates coordiantes)
+        private FigureBase[,] Field { get { return field; } }
+
+        public void ClearField()
         {
-            desk[coordiantes.X - 1, coordiantes.Y - 1] = figure;
+            field = new FigureBase[8, 8];
+        }
+
+        public void ChangePosition(FigureBase figure, Coordinates coordiantes)
+        {
+            Coordinates old = figure.Coordinates;
+            figure.Coordinates = coordiantes;
+            field[old.X - 1, old.Y - 1] = null;
+            field[coordiantes.X - 1, coordiantes.Y - 1] = figure;
+        }
+
+        public FigureBase GetFigure(Coordinates coordinates)
+        {
+            return Field[coordinates.X - 1, coordinates.Y - 1];
         }
 
         public override string ToString()
         {
-            StringBuilder result = new StringBuilder();
-            for (int i = 0; i < 8; i++)
+            string underscore = string.Format("{0}  ________________________________________{0}", Environment.NewLine);
+            StringBuilder result = new StringBuilder("Desk:" + underscore);
+            for (int i = 7; i >= 0; i--)
             {
-                result.AppendFormat(" {0}", desk[i, 0] == null ? "  " : desk[i, 0].ToString());
+                result.AppendFormat("{0} | {1}", i + 1, field[0, i] == null ? "  " : field[0, i].ToString());
                 for (int j = 1; j < 8; j++)
                 {
-                    result.AppendFormat(" , {0}", desk[i, j] == null ? "  " : desk[i, j].ToString());
+                    result.AppendFormat(" | {0}", field[j, i] == null ? "  " : field[j, i].ToString());
                 }
 
-                result.Append(Environment.NewLine);
+                result.Append("|");
+                result.Append(underscore);
             }
+
+            result.Append("    A     B    C    D    E    F    G    H");
 
             return result.ToString();
         }

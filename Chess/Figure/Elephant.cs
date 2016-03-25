@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Chess.Figure
 {
@@ -12,9 +8,100 @@ namespace Chess.Figure
         {
         }
 
-        public override void Move(Coordinates coordinate)
+        public override List<Coordinates> GetAllAvailablePositions()
         {
-            throw new NotImplementedException();
+            List<Coordinates> result = new List<Coordinates>();
+            FigureBase another;
+            Coordinates c;
+            if (Coordinates.X > 1)
+            {
+                for (int index = (Coordinates.X - 1); index >= 1; index--)
+                {
+                    c = new Coordinates(index, Coordinates.Y);
+                    another = Desk.GetFigure(c);
+                    if (another == null)
+                    {
+                        result.Add(c);
+                    }
+                    else if (another.Color != Color)
+                    {
+                        result.Add(c);
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
+            if (Coordinates.X < 8)
+            {
+                for (int index = (Coordinates.X + 1); index <= 8; index++)
+                {
+                    c = new Coordinates(index, Coordinates.Y);
+                    another = Desk.GetFigure(c);
+                    if (another == null)
+                    {
+                        result.Add(c);
+                    }
+                    else if (another.Color != Color)
+                    {
+                        result.Add(c);
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
+            if (Coordinates.Y > 1)
+            {
+                for (int index = (Coordinates.Y - 1); index >= 1; index--)
+                {
+                    c = new Coordinates(Coordinates.X, index);
+                    another = Desk.GetFigure(c);
+                    if (another == null)
+                    {
+                        result.Add(c);
+                    }
+                    else if (another.Color != Color)
+                    {
+                        result.Add(c);
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
+            if (Coordinates.Y < 8)
+            {
+                for (int index = (Coordinates.Y + 1); index <= 8; index++)
+                {
+                    c = new Coordinates(Coordinates.X, index);
+                    another = Desk.GetFigure(c);
+                    if (another == null)
+                    {
+                        result.Add(c);
+                    }
+                    else if (another.Color != Color)
+                    {
+                        result.Add(c);
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
+            return result;
         }
 
         public override string ToString()

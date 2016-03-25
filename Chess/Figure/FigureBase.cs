@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Chess.Figure
 {
@@ -21,6 +17,14 @@ namespace Chess.Figure
 
         public Coordinates Coordinates { get; set; }
 
-        public abstract void Move(Coordinates coordinate);
+        public void Move(Coordinates coordinates)
+        {
+            if (GetAllAvailablePositions().Contains(coordinates))
+            {
+                Desk.ChangePosition(this, coordinates);
+            }
+        }
+
+        public abstract List<Coordinates> GetAllAvailablePositions();
     }
 }

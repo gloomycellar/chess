@@ -12,9 +12,129 @@ namespace Chess.Figure
         {
         }
 
-        public override void Move(Coordinates coordinate)
+        public override List<Coordinates> GetAllAvailablePositions()
         {
-            throw new NotImplementedException();
+            List<Coordinates> result = new List<Coordinates>();
+            Coordinates c;
+            FigureBase figure;
+            int x, y;
+            if (Coordinates.X > 1 && Coordinates.Y > 1)
+            {
+                x = Coordinates.X - 1;
+                y = Coordinates.Y - 1;
+
+                do
+                {
+                    c = new Coordinates(x, y);
+                    figure = Desk.GetFigure(c);
+                    if (figure == null)
+                    {
+                        result.Add(c);
+                    }
+                    else if (figure.Color != Color)
+                    {
+                        result.Add(c);
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+
+                    x--;
+                    y--;
+                } while (x >= 1 && y >= 1);
+
+            }
+
+            if (Coordinates.X < 8 && Coordinates.Y > 1)
+            {
+                x = Coordinates.X + 1;
+                y = Coordinates.Y - 1;
+
+                do
+                {
+                    c = new Coordinates(x, y);
+                    figure = Desk.GetFigure(c);
+                    if (figure == null)
+                    {
+                        result.Add(c);
+                    }
+                    else if (figure.Color != Color)
+                    {
+                        result.Add(c);
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+
+                    x++;
+                    y--;
+                } while (x <= 8 && y >= 1);
+
+            }
+
+            if (Coordinates.X > 1 && Coordinates.Y < 8)
+            {
+                x = Coordinates.X - 1;
+                y = Coordinates.Y + 1;
+
+                do
+                {
+                    c = new Coordinates(x, y);
+                    figure = Desk.GetFigure(c);
+                    if (figure == null)
+                    {
+                        result.Add(c);
+                    }
+                    else if (figure.Color != Color)
+                    {
+                        result.Add(c);
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+
+                    x--;
+                    y++;
+                } while (x >= 1 && y <= 8);
+
+            }
+
+            if (Coordinates.X < 8 && Coordinates.Y < 8)
+            {
+                x = Coordinates.X + 1;
+                y = Coordinates.Y + 1;
+
+                do
+                {
+                    c = new Coordinates(x, y);
+                    figure = Desk.GetFigure(c);
+                    if (figure == null)
+                    {
+                        result.Add(c);
+                    }
+                    else if (figure.Color != Color)
+                    {
+                        result.Add(c);
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+
+                    x++;
+                    y++;
+                } while (x <= 8 && y <= 8);
+
+            }
+
+            return result;
         }
 
         public override string ToString()
