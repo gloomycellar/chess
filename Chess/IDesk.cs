@@ -13,6 +13,6 @@ namespace Chess
 
         void ChangePosition(FigureBase figure, Coordinates coordiantes);
 
-        void ClearField();
+        void Clear();
     }
 }

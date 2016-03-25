@@ -12,7 +12,7 @@ namespace Chess
         static void Main(string[] args)
         {
             IDesk desk = new Desk();
-            desk.ClearField();
+            desk.Clear();
             FigureBase figure = new Elephant(desk, Color.White, new Coordinates(1, 1));
             desk.ChangePosition(figure, new Coordinates(1, 1));
 
@@ -24,7 +24,7 @@ namespace Chess
             Console.WriteLine(desk);
 
             desk = new Desk();
-            desk.ClearField();
+            desk.Clear();
             figure = new Elephant(desk, Color.White, new Coordinates(1, 1));
             desk.ChangePosition(figure, new Coordinates(1, 1));
 

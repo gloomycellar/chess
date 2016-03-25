@@ -101,7 +101,7 @@ namespace Chess
             ChangePosition(figure, coordinates);
         }
 
-        public void ClearField()
+        public void Clear()
         {
             field = new FigureBase[8, 8];
         }
