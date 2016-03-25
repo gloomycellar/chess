@@ -19,12 +19,12 @@ namespace Chess.Figure
 
         public void Move(Coordinates coordinates)
         {
-            if (GetAllAvailablePositions().Contains(coordinates))
+            if (GetAvailablePositions().Contains(coordinates))
             {
                 Desk.ChangePosition(this, coordinates);
             }
         }
 
-        public abstract List<Coordinates> GetAllAvailablePositions();
+        public abstract List<Coordinates> GetAvailablePositions();
     }
 }

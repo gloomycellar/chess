@@ -176,10 +176,10 @@ namespace Chess
             }
 
             List<Coordinates> availableCoordinates = new List<Coordinates>();
-            list.ForEach(x => availableCoordinates.AddRange(x.GetAllAvailablePositions()));
+            list.ForEach(x => availableCoordinates.AddRange(x.GetAvailablePositions()));
 
             return availableCoordinates.Contains(king.Coordinates) 
-                && king.GetAllAvailablePositions().Except(availableCoordinates).Count() != 0;
+                && king.GetAvailablePositions().Except(availableCoordinates).Count() != 0;
         }
 
         public bool IsCheckmate(Color color)
@@ -198,10 +198,10 @@ namespace Chess
             }
 
             List<Coordinates> availableCoordinates = new List<Coordinates>();
-            list.ForEach(x => availableCoordinates.AddRange(x.GetAllAvailablePositions()));
+            list.ForEach(x => availableCoordinates.AddRange(x.GetAvailablePositions()));
 
             return availableCoordinates.Contains(king.Coordinates)
-                && king.GetAllAvailablePositions().Except(availableCoordinates).Count() == 0;
+                && king.GetAvailablePositions().Except(availableCoordinates).Count() == 0;
         }
 
         public override string ToString()

@@ -12,7 +12,7 @@ namespace Chess.Figure
         {
         }
 
-        public override List<Coordinates> GetAllAvailablePositions()
+        public override List<Coordinates> GetAvailablePositions()
         {
             List<Coordinates> result = new List<Coordinates>();
 
