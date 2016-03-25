@@ -14,5 +14,17 @@ namespace Chess
         void ChangePosition(FigureBase figure, Coordinates coordiantes);
 
         void Clear();
+
+        bool IsCheck(Color color);
+
+        bool IsCheckmate(Color color);
+
+        int HorizontalLength { get; }
+
+        int VerticalLength { get; }
+
+        List<FigureBase> Whites { get; }
+
+        List<FigureBase> Blacks { get; }
     }
 }
